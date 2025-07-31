@@ -1,0 +1,25 @@
+======= Legend =======
+--*     -> arguments you can give
+type    -> data type of input
+default -> default value if argument not provided
+choices -> choices from which you can use
+
+======= Paths =======
+--data_dir,        type=str,    default='/kaggle/input/active-learning-subset'
+--backbone_path,   type=str,    default='/kaggle/input/active-learning-subset/backboneSiteA2019.pth'
+--fc_path,         type=str,    default='/kaggle/input/active-learning-subset/fcSiteA2019.pth'
+
+======= General settings =======
+--rounds,          type=int,    default=10
+--query_size,      type=int,    default=50
+--sim,             type=int,    default=30
+--cold_start,      action='store_true'
+
+======= Training =======
+--lr,              type=float,  default=1e-3
+--epochs,          type=int,    default=30
+--batch_size,      type=int,    default=32
+
+======= Strategy =======
+--strategy,        type=str,    default='predictive_entropy',  
+choices=['predictive_entropy', 'bald', 'variation_ratio'],    
