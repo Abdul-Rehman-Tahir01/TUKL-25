@@ -27,7 +27,7 @@ You can change any of the four utility files (dataset.py, model.py, query_strate
 
 ## Results Logging and Checkpoints
 
-The results are being stored per Active Learning round in a txt file in python dictionary format and has following structure:
+-> The results are being stored per Active Learning round in a txt file in python dictionary format and has following structure:
 
 ```
 {
@@ -58,7 +58,22 @@ The results are being stored per Active Learning round in a txt file in python d
 }
 ```
 
-The checkpoints are also being created at each AL round, stored in pth format and has following structure:
+Loading and reading the results:
+
+```
+import json
+
+with open("history_{strategy}.txt", "r") as f:
+    history = json.load(f)
+
+# Now `history` is a Python dictionary
+print(history["rounds"])
+print(history["val_accuracy"])
+print(history['confusion_matrices'])
+
+```
+<br>
+-> The checkpoints are also being created at each AL round, stored in pth format and has following structure:
 
 ```
 {
@@ -70,6 +85,24 @@ The checkpoints are also being created at each AL round, stored in pth format an
     'unlabeled_pool': list(unlabeled_pool),
     'args': vars(args),
 }
+```
+
+Loading and reading the checkpoints:
+
+```
+checkpoint = torch.load('checkpoint_{strategy}_round_{round_num}.pth')
+
+# Restore round number and history
+round_num = checkpoint['round']
+labeled_pool = set(checkpoint['labeled_pool'])
+unlabeled_pool = set(checkpoint['unlabeled_pool'])
+
+# Restore models
+backbone.load_state_dict(checkpoint['backbone_state_dict'])
+fc.load_state_dict(checkpoint['fc_state_dict'])
+
+# Restore optimizer
+optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 ```
 
 ## Usage 
