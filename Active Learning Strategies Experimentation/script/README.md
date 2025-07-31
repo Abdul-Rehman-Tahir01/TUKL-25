@@ -79,10 +79,10 @@ The checkpoints are also being created at each AL round, stored in pth format an
 python bal_script.py
 ```
 
-Example: With strategy selection, epoch, simulation, rounds and learning rate
+Example: With strategy selection, epoch, simulation, rounds, cold start and  learning rate
 
 ```shell
-python bal_script.py --strategy bald --epochs 10 --sim 20 --rounds 15 --lr 1e-6
+python bal_script.py --strategy bald --epochs 10 --sim 20 --rounds 15 --cold_start --lr 1e-6
 ```
 
 Example: With data directory, backbone and fc path
