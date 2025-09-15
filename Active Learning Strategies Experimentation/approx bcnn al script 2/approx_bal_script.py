@@ -118,7 +118,8 @@ def main():
 
     # load checkpoint if exists
     start_round, labeled_pool, unlabeled_pool, history = load_checkpoint(args, backbone, fc, optimizer, device)
-    start_round = 0 if args.initial_labeled>0 else 1
+    if len(labeled_pool) == 0:
+        start_round = 0 if args.initial_labeled>0 else 1
 
     if history is None:
         history = {
